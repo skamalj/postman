@@ -1,0 +1,780 @@
+{
+  "info": {
+    "_postman_id": "3691105e-b911-4f24-93a2-4903d127c804",
+    "name": "Azure APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "clean up",
+      "item": [
+        {
+          "name": "Del DisablePublicAccessOnCosmosDB",
+          "_postman_id": "d2697104-9ced-40bd-abcf-e15235f36576",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/disable-publicaccess-cosmosdb?api-version=2021-06-01",
+              "protocol": "https",
+              "host": [
+                "management",
+                "azure",
+                "com"
+              ],
+              "path": [
+                "subscriptions",
+                "{{subscriptionId}}",
+                "providers",
+                "Microsoft.Authorization",
+                "policyAssignments",
+                "disable-publicaccess-cosmosdb"
+              ],
+              "query": [
+                {
+                  "key": "api-version",
+                  "value": "2021-06-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Del AuditNSG",
+          "_postman_id": "42387164-a1ec-42f1-8984-f9afcad7ffd0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/audit-nsg-assignment?api-version=2021-06-01",
+              "protocol": "https",
+              "host": [
+                "management",
+                "azure",
+                "com"
+              ],
+              "path": [
+                "subscriptions",
+                "{{subscriptionId}}",
+                "providers",
+                "Microsoft.Authorization",
+                "policyAssignments",
+                "audit-nsg-assignment"
+              ],
+              "query": [
+                {
+                  "key": "api-version",
+                  "value": "2021-06-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "0c47dccd-99e1-4f53-a78a-5a6144d27cbd"
+    },
+    {
+      "name": "Get Resource Groups",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "89194826-7078-4765-bc43-adc11e99b18b",
+            "exec": [
+              "// Based on CHAI Assertion and pm.expect\r",
+              "var rgs = pm.response.json().value;\r",
+              "rgArray = rgs.map(rg => rg.name)\r",
+              "rgArray.map(JSON.stringify(rgArray))\r",
+              "console.log(rgArray)\r",
+              "pm.test(\"RG apimgrg exists\", function () {\r",
+              "    pm.expect(rgArray.includes(\"apimgrg\")).to.be.true;\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "_postman_id": "81bd6021-e0ca-47e0-93f0-6d7d438a1643",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourcegroups?api-version=2021-04-01",
+          "protocol": "https",
+          "host": [
+            "management",
+            "azure",
+            "com"
+          ],
+          "path": [
+            "subscriptions",
+            "{{subscriptionId}}",
+            "resourcegroups"
+          ],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2021-04-01"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Blueprint",
+      "_postman_id": "1977ab15-5e3a-4b7d-93f2-787ab62c7692",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"properties\": {\n        \"description\": \"This blueprint sets tag policy and role assignment on the subscription, creates a ResourceGroup, and deploys a resource template and role assignment to that ResourceGroup.\",\n        \"targetScope\": \"subscription\",\n        \"parameters\": {\n            \"storageAccountType\": {\n                \"type\": \"string\",\n                \"metadata\": {\n                    \"displayName\": \"storage account type.\",\n                    \"description\": null\n                }\n            },\n            \"tagName\": {\n                \"type\": \"string\",\n                \"metadata\": {\n                    \"displayName\": \"The name of the tag to provide the policy assignment.\",\n                    \"description\": null\n                }\n            },\n            \"tagValue\": {\n                \"type\": \"string\",\n                \"metadata\": {\n                    \"displayName\": \"The value of the tag to provide the policy assignment.\",\n                    \"description\": null\n                }\n            },\n            \"contributors\": {\n                \"type\": \"array\",\n                \"metadata\": {\n                    \"description\": \"List of AAD object IDs that is assigned Contributor role at the subscription\"\n                }\n            },\n            \"owners\": {\n                \"type\": \"array\",\n                \"metadata\": {\n                    \"description\": \"List of AAD object IDs that is assigned Owner role at the resource group\"\n                }\n            }\n        },\n        \"resourceGroups\": {\n            \"storageRG\": {\n                \"metadata\": {\n                    \"description\": \"Contains the resource template deployment and a role assignment.\"\n                },\n                \"name\": \"storageRG2\",\n                \"location\": \"westindia\"\n            }\n        }\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Blueprint/blueprints/MyBlueprint?api-version=2018-11-01-preview",
+          "protocol": "https",
+          "host": [
+            "management",
+            "azure",
+            "com"
+          ],
+          "path": [
+            "providers",
+            "Microsoft.Management",
+            "managementGroups",
+            "{{MGId}}",
+            "providers",
+            "Microsoft.Blueprint",
+            "blueprints",
+            "MyBlueprint"
+          ],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2018-11-01-preview"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add roleAssignment Artifact to BluePrint",
+      "_postman_id": "48dfdd4d-2f24-4b71-ade8-e10e12c59b7b",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"kind\": \"roleAssignment\",\n    \"properties\": {\n        \"roleDefinitionId\": \"/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\",\n        \"principalIds\": \"[parameters('contributors')]\"\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Blueprint/blueprints/MyBlueprint/artifacts/roleContributor?api-version=2018-11-01-preview",
+          "protocol": "https",
+          "host": [
+            "management",
+            "azure",
+            "com"
+          ],
+          "path": [
+            "providers",
+            "Microsoft.Management",
+            "managementGroups",
+            "{{MGId}}",
+            "providers",
+            "Microsoft.Blueprint",
+            "blueprints",
+            "MyBlueprint",
+            "artifacts",
+            "roleContributor"
+          ],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2018-11-01-preview"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add policy Assignment to BluePrint - RG Tags",
+      "_postman_id": "5dee48cb-ef59-42a0-ba1d-533b62e4b950",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"kind\": \"policyAssignment\",\n    \"properties\": {\n        \"description\": \"Apply tag and its default value to resource groups\",\n        \"policyDefinitionId\": \"/providers/Microsoft.Authorization/policyDefinitions/49c88fc8-6fd1-46fd-a676-f12d1d3a4c71\",\n        \"parameters\": {\n            \"tagName\": {\n                \"value\": \"[parameters('tagName')]\"\n            },\n            \"tagValue\": {\n                \"value\": \"[parameters('tagValue')]\"\n            }\n        }\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Blueprint/blueprints/MyBlueprint/artifacts/policyTags?api-version=2018-11-01-preview",
+          "protocol": "https",
+          "host": [
+            "management",
+            "azure",
+            "com"
+          ],
+          "path": [
+            "providers",
+            "Microsoft.Management",
+            "managementGroups",
+            "{{MGId}}",
+            "providers",
+            "Microsoft.Blueprint",
+            "blueprints",
+            "MyBlueprint",
+            "artifacts",
+            "policyTags"
+          ],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2018-11-01-preview"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Policy Assignment to Blueprint - Add Storage Tags",
+      "_postman_id": "8b49848e-6f1d-4958-b18f-00130c83a302",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"kind\": \"policyAssignment\",\n    \"properties\": {\n        \"description\": \"Apply storage tag and the parameter also used by the template to resource groups\",\n        \"policyDefinitionId\": \"/providers/Microsoft.Authorization/policyDefinitions/49c88fc8-6fd1-46fd-a676-f12d1d3a4c71\",\n        \"parameters\": {\n            \"tagName\": {\n                \"value\": \"StorageType\"\n            },\n            \"tagValue\": {\n                \"value\": \"[parameters('storageAccountType')]\"\n            }\n        }\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Blueprint/blueprints/MyBlueprint/artifacts/policyStorageTags?api-version=2018-11-01-preview",
+          "protocol": "https",
+          "host": [
+            "management",
+            "azure",
+            "com"
+          ],
+          "path": [
+            "providers",
+            "Microsoft.Management",
+            "managementGroups",
+            "{{MGId}}",
+            "providers",
+            "Microsoft.Blueprint",
+            "blueprints",
+            "MyBlueprint",
+            "artifacts",
+            "policyStorageTags"
+          ],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2018-11-01-preview"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PD - Location Policy",
+      "_postman_id": "9bcbc739-3014-41d8-b696-ff78704fc0cf",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"properties\": {\n        \"displayName\": \"Allowed locations\",\n        \"description\": \"This policy enables you to restrict the locations your organization can specify when deploying resources.\",\n        \"mode\": \"Indexed\",\n        \"metadata\": {\n            \"version\": \"1.0.0\",\n            \"category\": \"Locations\"\n        },\n        \"parameters\": {\n            \"allowedLocations\": {\n                \"type\": \"array\",\n                \"metadata\": {\n                    \"description\": \"The list of locations that can be specified when deploying resources\",\n                    \"strongType\": \"location\",\n                    \"displayName\": \"Allowed locations\"\n                },\n                \"defaultValue\": [ \"centralindia\" , \"eastus\"],\n                \"allowedValues\": [\n                    \"eastus\",\n                    \"centralindia\",\n                    \"westus\"\n                ]\n            }\n        },\n        \"policyRule\": {\n            \"if\": {\n                \"not\": {\n                    \"field\": \"location\",\n                    \"in\": \"[parameters('allowedLocations')]\"\n                }\n            },\n            \"then\": {\n                \"effect\": \"deny\"\n            }\n        }\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/myLocationPolicy?api-version=2021-06-01",
+          "protocol": "https",
+          "host": [
+            "management",
+            "azure",
+            "com"
+          ],
+          "path": [
+            "providers",
+            "Microsoft.Management",
+            "managementGroups",
+            "{{MGId}}",
+            "providers",
+            "Microsoft.Authorization",
+            "policyDefinitions",
+            "myLocationPolicy"
+          ],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2021-06-01"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PD - Audit NSG for public access",
+      "_postman_id": "480dec4b-27ff-4a16-9159-a5b6923fe8e9",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"properties\": {\n        \"displayName\": \"Audit NSGs\",\n        \"description\": \"Audit NSG's for publicly opened rules i.e 0.0.0.0/0 or *\",\n        \"mode\": \"Indexed\",\n        \"metadata\" :{\n            \"version\": \"1.0.0\",\n            \"category\": \"Network\"\n        },\n        \"policyRule\": {\n            \"if\": { \n                \"count\": {\n                    \"field\" : \"Microsoft.Network/networkSecurityGroups/securityRules[*]\",\n                    \"where\": {\n                        \"allOf\": [\n                            {\n                                \"field\" : \"Microsoft.Network/networkSecurityGroups/securityRules[*].sourceAddressPrefix\",\n                                \"in\" : [\"0.0.0.0/0\", \"*\"]\n                            },\n                            {\n                                \"field\" : \"Microsoft.Network/networkSecurityGroups/securityRules[*].access\",\n                                \"equals\" : \"Allow\"\n                            },\n                            {\n                                \"field\" : \"Microsoft.Network/networkSecurityGroups/securityRules[*].direction\",\n                                \"equals\" : \"Inbound\"\n                            }\n                        ]\n                    }\n                },\n                \"greater\": 0\n            },\n            \"then\": {\n                    \"effect\": \"deny\"\n            }\n        }\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/AuditNSGPublicRule?api-version=2021-06-01",
+          "protocol": "https",
+          "host": [
+            "management",
+            "azure",
+            "com"
+          ],
+          "path": [
+            "providers",
+            "Microsoft.Management",
+            "managementGroups",
+            "{{MGId}}",
+            "providers",
+            "Microsoft.Authorization",
+            "policyDefinitions",
+            "AuditNSGPublicRule"
+          ],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2021-06-01"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PD - StorageAccount is encrypted",
+      "_postman_id": "4a98face-c914-4632-bc90-1c2c83ffa7a1",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"properties\": {\n    \"displayName\": \"Enforce encryption on storage Accounts\",\n    \"mode\": \"Indexed\",\n    \"description\": \"This policy enables you to enforce encryption on Storage Accounts\",\n    \"metadata\": {\n      \"version\": \"1.0.0\",\n      \"category\": \"Storage\"\n    },\n    \"policyRule\": {\n      \"if\": {\n        \"allOf\": [\n          {\n            \"field\": \"type\",\n            \"equals\": \"Microsoft.Storage/storageAccounts\"\n          },\n          {\n            \"not\": {\n              \"field\": \"Microsoft.Storage/storageAccounts/encryption.keySource\",\n              \"equals\": \"Microsoft.Keyvault\"\n            }\n          }\n        ]\n      },\n      \"then\": {\n        \"effect\": \"Deny\"\n      }\n    }\n  },\n  \"name\": \"sorageAccountIsEncrypted\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/sorageAccountIsEncrypted?api-version=2021-06-01",
+          "protocol": "https",
+          "host": [
+            "management",
+            "azure",
+            "com"
+          ],
+          "path": [
+            "providers",
+            "Microsoft.Management",
+            "managementGroups",
+            "{{MGId}}",
+            "providers",
+            "Microsoft.Authorization",
+            "policyDefinitions",
+            "sorageAccountIsEncrypted"
+          ],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2021-06-01"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PD - Disable Publics Access to CosmosDB - Append",
+      "_postman_id": "3a7f0275-0ea6-447d-98a9-d80f7e098d52",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"properties\": {\n    \"displayName\": \"Dsiable Public Access to CosmosDB\",\n    \"mode\": \"Indexed\",\n    \"description\": \"This policy disables public access for cosmosdb\",\n    \"metadata\": {\n      \"version\": \"1.0.0\",\n      \"category\": \"CosmosDB\"\n    },\n    \"policyRule\": {\n      \"if\": {\n        \"allOf\": [\n              {\n                \"field\": \"type\",\n                \"equals\": \"Microsoft.DocumentDB/databaseAccounts\"\n                },\n                { \n                    \"not\": { \n                        \"allOf\" : [\n                            {\n                                \"count\": {\n                                    \"field\": \"Microsoft.DocumentDB/databaseAccounts/ipRules[*]\"\n                                },\n                                \"notEquals\": 0\n\n                            },\n                            {\n                                \"count\": {\n                                  \"field\": \"Microsoft.DocumentDB/databaseAccounts/ipRules[*]\",\n                                  \"where\": {\n                                    \"field\": \"Microsoft.DocumentDB/databaseAccounts/ipRules[*].ipAddressOrRange\",\n                                    \"equals\": \"40.40.40.40\"\n                                  }\n                                },\n                                \"equals\": 1\n                            } \n                        ]\n                    }\n                }\n        ]\n      },\n      \"then\": {\n        \"effect\": \"append\",\n        \"details\" : [{\n                   \"field\": \"Microsoft.DocumentDB/databaseAccounts/ipRules[*]\",\n                   \"value\": { \n                       \"ipAddressOrRange\":  \"40.40.40.40\"\n                    }\n               }]\n        }\n    }\n  },\n  \"name\": \"DisablePublicAccessOnCosmosDB\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/DisablePublicAccessOnCosmosDB?api-version=2021-06-01",
+          "protocol": "https",
+          "host": [
+            "management",
+            "azure",
+            "com"
+          ],
+          "path": [
+            "providers",
+            "Microsoft.Management",
+            "managementGroups",
+            "{{MGId}}",
+            "providers",
+            "Microsoft.Authorization",
+            "policyDefinitions",
+            "DisablePublicAccessOnCosmosDB"
+          ],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2021-06-01"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AP - VMs without managed Disks",
+      "_postman_id": "e3949635-c1eb-47e4-8ba0-e3dd71e82750",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"properties\": {\n    \"displayName\": \"Audit VMs without managed disks Assignment\",\n    \"description\": \"Shows all virtual machines not using managed disks\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Authorization/policyDefinitions/06a78e20-9358-41c9-923c-fb736d382a4d\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Virtual machines should use a managed disk\"\n        }\n    ]\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/audit-vm-manageddisks?api-version=2021-06-01",
+          "protocol": "https",
+          "host": [
+            "management",
+            "azure",
+            "com"
+          ],
+          "path": [
+            "subscriptions",
+            "{{subscriptionId}}",
+            "providers",
+            "Microsoft.Authorization",
+            "policyAssignments",
+            "audit-vm-manageddisks"
+          ],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2021-06-01"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AP - Location - Subscription Scope",
+      "_postman_id": "095f6b64-9281-461e-8a52-dae5ea7af1c2",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"properties\": {\n    \"displayName\": \"Restrict location of resources\",\n    \"description\": \"All resources must be in  location - centralindia or eastus\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/myLocationPolicy\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"All resources must be in  location - centralindia or eastus\"\n        }\n    ]\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/location-policy-assignment?api-version=2021-06-01",
+          "protocol": "https",
+          "host": [
+            "management",
+            "azure",
+            "com"
+          ],
+          "path": [
+            "subscriptions",
+            "{{subscriptionId}}",
+            "providers",
+            "Microsoft.Authorization",
+            "policyAssignments",
+            "location-policy-assignment"
+          ],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2021-06-01"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AP  - Storage Account is Encrypted - Subscription Scope",
+      "_postman_id": "cef1a8ca-1459-4e2d-a521-9d87e1eb69ae",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"properties\": {\n    \"displayName\": \"Enforce storage accounts to be encrypted\",\n    \"description\": \"All storage accounts in subscription must be encrypted\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/sorageAccountIsEncrypted\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Storage account must be encrypted\"\n        }\n    ]\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/storage-account-encrypted-assignment?api-version=2021-06-01",
+          "protocol": "https",
+          "host": [
+            "management",
+            "azure",
+            "com"
+          ],
+          "path": [
+            "subscriptions",
+            "{{subscriptionId}}",
+            "providers",
+            "Microsoft.Authorization",
+            "policyAssignments",
+            "storage-account-encrypted-assignment"
+          ],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2021-06-01"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AP  - NSG Audit - Subscription Scope",
+      "_postman_id": "fff6e241-de53-4c6b-be82-ec6cd74bda26",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"properties\": {\n    \"displayName\": \"Audit NSG for public rule - Ingress\",\n    \"description\": \"Audit NSG for public rule - Ingress\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/AuditNSGPublicRule\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Ingress rule cannot have source as 0.0.0.0/0 or *\"\n        }\n    ]\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/audit-nsg-assignment?api-version=2021-06-01",
+          "protocol": "https",
+          "host": [
+            "management",
+            "azure",
+            "com"
+          ],
+          "path": [
+            "subscriptions",
+            "{{subscriptionId}}",
+            "providers",
+            "Microsoft.Authorization",
+            "policyAssignments",
+            "audit-nsg-assignment"
+          ],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2021-06-01"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AP -  Disable Publics Access to CosmosDB - Subscription Scope",
+      "_postman_id": "57794f66-648d-4227-b891-add75c7de522",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"identity\": {\n    \"type\": \"SystemAssigned\"\n  },\n  \"location\": \"centralindia\",\n  \"properties\": {\n    \"displayName\": \"Disable public access to CosmosDB\",\n    \"description\": \"Disable public access to CosmosDB\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/DisablePublicAccessOnCosmosDB\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Disable public access to CosmosDB\"\n        }\n    ]\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/disable-publicaccess-cosmosdb?api-version=2021-06-01",
+          "protocol": "https",
+          "host": [
+            "management",
+            "azure",
+            "com"
+          ],
+          "path": [
+            "subscriptions",
+            "{{subscriptionId}}",
+            "providers",
+            "Microsoft.Authorization",
+            "policyAssignments",
+            "disable-publicaccess-cosmosdb"
+          ],
+          "query": [
+            {
+              "key": "api-version",
+              "value": "2021-06-01"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Aliases",
+      "_postman_id": "0e92d806-5281-4b04-8252-99bae53e7c0d",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": null
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": {
+      "clientId": "{{clientId}}",
+      "clientSecret": "{{clientSecret}}",
+      "scope": "",
+      "resource": {
+        "5cbacdee-47ca-47bd-a10f-98c08eca55cd": "https://management.azure.com/"
+      },
+      "addTokenTo": "header",
+      "accessTokenUrl": "https://login.microsoftonline.com/{{tenantId}}/oauth2/token",
+      "client_authentication": "header",
+      "grant_type": "client_credentials"
+    }
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "c2e2e044-b5a5-4bbc-a122-3faa6427edb3",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "ff36ae93-6235-4b35-aa7a-5657cb838afa",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
