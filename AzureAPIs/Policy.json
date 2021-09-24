@@ -1214,7 +1214,7 @@
           "name": "ACR Disable Public Access",
           "item": [
             {
-              "name": "ACR Retention Policy",
+              "name": "ACR Disable Public Access Assignment",
               "event": [
                 {
                   "listen": "test",
