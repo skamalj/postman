@@ -1215,6 +1215,20 @@
           "item": [
             {
               "name": "ACR Retention Policy",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "ac7c0277-6b34-43cd-a062-55b8284c6fe3",
+                    "exec": [
+                      "pm.test(\"Status code is 200 or 204\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "d731a6bf-3b08-433c-be65-86c980760e93",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
