@@ -629,50 +629,6 @@
               "response": []
             },
             {
-              "name": "Assign - Location  Policy",
-              "id": "095f6b64-9281-461e-8a52-dae5ea7af1c2",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "PUT",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Restrict location of resources\",\n    \"description\": \"All resources must be in  location - centralindia or eastus\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/myLocationPolicy\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"All resources must be in  location - centralindia or eastus\"\n        }\n    ]\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/location-policy-assignment?api-version=2021-06-01",
-                  "protocol": "https",
-                  "host": [
-                    "management",
-                    "azure",
-                    "com"
-                  ],
-                  "path": [
-                    "subscriptions",
-                    "{{subscriptionId}}",
-                    "providers",
-                    "Microsoft.Authorization",
-                    "policyAssignments",
-                    "location-policy-assignment"
-                  ],
-                  "query": [
-                    {
-                      "key": "api-version",
-                      "value": "2021-06-01"
-                    }
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
               "name": "Storage Account Encrypted Definition Copy",
               "event": [
                 {
@@ -713,6 +669,50 @@
                     "Microsoft.Authorization",
                     "policyDefinitions",
                     "sorageAccountIsEncrypted"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Assign - Location  Policy",
+              "id": "095f6b64-9281-461e-8a52-dae5ea7af1c2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Restrict location of resources\",\n    \"description\": \"All resources must be in  location - centralindia or eastus\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/myLocationPolicy\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"All resources must be in  location - centralindia or eastus\"\n        }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/location-policy-assignment?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "{{subscriptionId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyAssignments",
+                    "location-policy-assignment"
                   ],
                   "query": [
                     {
