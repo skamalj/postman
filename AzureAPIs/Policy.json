@@ -988,7 +988,7 @@
           "name": "NSG Public Rule - deny",
           "item": [
             {
-              "name": "AuditNSG",
+              "name": "NSG Public Rule Assignment",
               "event": [
                 {
                   "listen": "test",
