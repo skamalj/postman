@@ -697,6 +697,20 @@
             },
             {
               "name": "Assign - Location  Policy",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "6a7e7e9b-79da-4361-b706-4a94dc216833",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "095f6b64-9281-461e-8a52-dae5ea7af1c2",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
