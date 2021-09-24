@@ -763,6 +763,21 @@
           "item": [
             {
               "name": "IPRule CosmosDB - Assign",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "beb4f8a1-9a24-4342-8a56-8e474ee45baf",
+                    "exec": [
+                      "pm.test(\"Status code is 200 or 204\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "d2697104-9ced-40bd-abcf-e15235f36576",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
@@ -771,7 +786,7 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/disable-publicaccess-cosmosdb?api-version=2021-06-01",
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/iprule-on-cosmosdb?api-version=2021-06-01",
                   "protocol": "https",
                   "host": [
                     "management",
@@ -784,7 +799,7 @@
                     "providers",
                     "Microsoft.Authorization",
                     "policyAssignments",
-                    "disable-publicaccess-cosmosdb"
+                    "iprule-on-cosmosdb"
                   ],
                   "query": [
                     {
