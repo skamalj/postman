@@ -849,7 +849,7 @@
               "response": []
             },
             {
-              "name": "PD - Disable Publics Access to CosmosDB - Append",
+              "name": "Define - IPRule on CosmosDB",
               "id": "3a7f0275-0ea6-447d-98a9-d80f7e098d52",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
