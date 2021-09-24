@@ -864,58 +864,6 @@
               "response": []
             },
             {
-              "name": "IPRule CosmosDB Definition Copy",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "3cb9bb54-5c88-474f-acc5-2d2d8ca35fae",
-                    "exec": [
-                      "pm.test(\"Status code is 200 or 204\", function () {",
-                      "    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
-                      "});",
-                      ""
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "id": "c79b16db-0102-403f-a5d8-22265a630193",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/IPRuleOnCosmosDB?api-version=2021-06-01",
-                  "protocol": "https",
-                  "host": [
-                    "management",
-                    "azure",
-                    "com"
-                  ],
-                  "path": [
-                    "providers",
-                    "Microsoft.Management",
-                    "managementGroups",
-                    "{{MGId}}",
-                    "providers",
-                    "Microsoft.Authorization",
-                    "policyDefinitions",
-                    "IPRuleOnCosmosDB"
-                  ],
-                  "query": [
-                    {
-                      "key": "api-version",
-                      "value": "2021-06-01"
-                    }
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
               "name": "Define - IPRule on CosmosDB",
               "event": [
                 {
@@ -1153,6 +1101,58 @@
                     "Microsoft.Authorization",
                     "policyAssignments",
                     "audit-nsg-assignment"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "IPRule CosmosDB Definition Copy",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "3cb9bb54-5c88-474f-acc5-2d2d8ca35fae",
+                    "exec": [
+                      "pm.test(\"Status code is 200 or 204\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "c79b16db-0102-403f-a5d8-22265a630193",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/IPRuleOnCosmosDB?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "providers",
+                    "Microsoft.Management",
+                    "managementGroups",
+                    "{{MGId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyDefinitions",
+                    "IPRuleOnCosmosDB"
                   ],
                   "query": [
                     {
