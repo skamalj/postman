@@ -1237,7 +1237,7 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/acr-retention-policy-assignment?api-version=2021-06-01",
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/acr-disable-public-access-assignment?api-version=2021-06-01",
                   "protocol": "https",
                   "host": [
                     "management",
@@ -1250,7 +1250,7 @@
                     "providers",
                     "Microsoft.Authorization",
                     "policyAssignments",
-                    "acr-retention-policy-assignment"
+                    "acr-disable-public-access-assignment"
                   ],
                   "query": [
                     {
