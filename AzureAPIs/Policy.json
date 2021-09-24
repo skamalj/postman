@@ -795,6 +795,52 @@
                 }
               },
               "response": []
+            },
+            {
+              "name": "PD - Disable Publics Access to CosmosDB - Append",
+              "id": "3a7f0275-0ea6-447d-98a9-d80f7e098d52",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Dsiable Public Access to CosmosDB\",\n    \"mode\": \"Indexed\",\n    \"description\": \"This policy disables public access for cosmosdb\",\n    \"metadata\": {\n      \"version\": \"1.0.0\",\n      \"category\": \"CosmosDB\"\n    },\n    \"policyRule\": {\n      \"if\": {\n        \"allOf\": [\n              {\n                \"field\": \"type\",\n                \"equals\": \"Microsoft.DocumentDB/databaseAccounts\"\n                },\n                { \n                    \"not\": { \n                        \"allOf\" : [\n                            {\n                                \"count\": {\n                                    \"field\": \"Microsoft.DocumentDB/databaseAccounts/ipRules[*]\"\n                                },\n                                \"notEquals\": 0\n\n                            },\n                            {\n                                \"count\": {\n                                  \"field\": \"Microsoft.DocumentDB/databaseAccounts/ipRules[*]\",\n                                  \"where\": {\n                                    \"field\": \"Microsoft.DocumentDB/databaseAccounts/ipRules[*].ipAddressOrRange\",\n                                    \"equals\": \"40.40.40.40\"\n                                  }\n                                },\n                                \"equals\": 1\n                            } \n                        ]\n                    }\n                }\n        ]\n      },\n      \"then\": {\n        \"effect\": \"append\",\n        \"details\" : [{\n                   \"field\": \"Microsoft.DocumentDB/databaseAccounts/ipRules[*]\",\n                   \"value\": { \n                       \"ipAddressOrRange\":  \"40.40.40.40\"\n                    }\n               }]\n        }\n    }\n  },\n  \"name\": \"DisablePublicAccessOnCosmosDB\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/DisablePublicAccessOnCosmosDB?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "providers",
+                    "Microsoft.Management",
+                    "managementGroups",
+                    "{{MGId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyDefinitions",
+                    "DisablePublicAccessOnCosmosDB"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
             }
           ],
           "id": "89aebe5e-f742-46e6-8600-ce8c440c14ef"
@@ -985,52 +1031,6 @@
                 "Microsoft.Authorization",
                 "policyDefinitions",
                 "acrHasRetentionPolicy"
-              ],
-              "query": [
-                {
-                  "key": "api-version",
-                  "value": "2021-06-01"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "PD - Disable Publics Access to CosmosDB - Append",
-          "id": "3a7f0275-0ea6-447d-98a9-d80f7e098d52",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"properties\": {\n    \"displayName\": \"Dsiable Public Access to CosmosDB\",\n    \"mode\": \"Indexed\",\n    \"description\": \"This policy disables public access for cosmosdb\",\n    \"metadata\": {\n      \"version\": \"1.0.0\",\n      \"category\": \"CosmosDB\"\n    },\n    \"policyRule\": {\n      \"if\": {\n        \"allOf\": [\n              {\n                \"field\": \"type\",\n                \"equals\": \"Microsoft.DocumentDB/databaseAccounts\"\n                },\n                { \n                    \"not\": { \n                        \"allOf\" : [\n                            {\n                                \"count\": {\n                                    \"field\": \"Microsoft.DocumentDB/databaseAccounts/ipRules[*]\"\n                                },\n                                \"notEquals\": 0\n\n                            },\n                            {\n                                \"count\": {\n                                  \"field\": \"Microsoft.DocumentDB/databaseAccounts/ipRules[*]\",\n                                  \"where\": {\n                                    \"field\": \"Microsoft.DocumentDB/databaseAccounts/ipRules[*].ipAddressOrRange\",\n                                    \"equals\": \"40.40.40.40\"\n                                  }\n                                },\n                                \"equals\": 1\n                            } \n                        ]\n                    }\n                }\n        ]\n      },\n      \"then\": {\n        \"effect\": \"append\",\n        \"details\" : [{\n                   \"field\": \"Microsoft.DocumentDB/databaseAccounts/ipRules[*]\",\n                   \"value\": { \n                       \"ipAddressOrRange\":  \"40.40.40.40\"\n                    }\n               }]\n        }\n    }\n  },\n  \"name\": \"DisablePublicAccessOnCosmosDB\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/DisablePublicAccessOnCosmosDB?api-version=2021-06-01",
-              "protocol": "https",
-              "host": [
-                "management",
-                "azure",
-                "com"
-              ],
-              "path": [
-                "providers",
-                "Microsoft.Management",
-                "managementGroups",
-                "{{MGId}}",
-                "providers",
-                "Microsoft.Authorization",
-                "policyDefinitions",
-                "DisablePublicAccessOnCosmosDB"
               ],
               "query": [
                 {
