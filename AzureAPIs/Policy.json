@@ -1021,6 +1021,52 @@
                 }
               },
               "response": []
+            },
+            {
+              "name": "PD - Audit NSG for public access",
+              "id": "480dec4b-27ff-4a16-9159-a5b6923fe8e9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"properties\": {\n        \"displayName\": \"Audit NSGs\",\n        \"description\": \"Audit NSG's for publicly opened rules i.e 0.0.0.0/0 or *\",\n        \"mode\": \"Indexed\",\n        \"metadata\" :{\n            \"version\": \"1.0.0\",\n            \"category\": \"Network\"\n        },\n        \"policyRule\": {\n            \"if\": { \n                \"count\": {\n                    \"field\" : \"Microsoft.Network/networkSecurityGroups/securityRules[*]\",\n                    \"where\": {\n                        \"allOf\": [\n                            {\n                                \"field\" : \"Microsoft.Network/networkSecurityGroups/securityRules[*].sourceAddressPrefix\",\n                                \"in\" : [\"0.0.0.0/0\", \"*\"]\n                            },\n                            {\n                                \"field\" : \"Microsoft.Network/networkSecurityGroups/securityRules[*].access\",\n                                \"equals\" : \"Allow\"\n                            },\n                            {\n                                \"field\" : \"Microsoft.Network/networkSecurityGroups/securityRules[*].direction\",\n                                \"equals\" : \"Inbound\"\n                            }\n                        ]\n                    }\n                },\n                \"greater\": 0\n            },\n            \"then\": {\n                    \"effect\": \"deny\"\n            }\n        }\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/AuditNSGPublicRule?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "providers",
+                    "Microsoft.Management",
+                    "managementGroups",
+                    "{{MGId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyDefinitions",
+                    "AuditNSGPublicRule"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
             }
           ],
           "id": "8c60d95a-3758-4036-b742-23450c24bdc0"
@@ -1049,52 +1095,6 @@
                 "Microsoft.Authorization",
                 "policyAssignments",
                 "acr-retention-policy-assignment"
-              ],
-              "query": [
-                {
-                  "key": "api-version",
-                  "value": "2021-06-01"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "PD - Audit NSG for public access",
-          "id": "480dec4b-27ff-4a16-9159-a5b6923fe8e9",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"properties\": {\n        \"displayName\": \"Audit NSGs\",\n        \"description\": \"Audit NSG's for publicly opened rules i.e 0.0.0.0/0 or *\",\n        \"mode\": \"Indexed\",\n        \"metadata\" :{\n            \"version\": \"1.0.0\",\n            \"category\": \"Network\"\n        },\n        \"policyRule\": {\n            \"if\": { \n                \"count\": {\n                    \"field\" : \"Microsoft.Network/networkSecurityGroups/securityRules[*]\",\n                    \"where\": {\n                        \"allOf\": [\n                            {\n                                \"field\" : \"Microsoft.Network/networkSecurityGroups/securityRules[*].sourceAddressPrefix\",\n                                \"in\" : [\"0.0.0.0/0\", \"*\"]\n                            },\n                            {\n                                \"field\" : \"Microsoft.Network/networkSecurityGroups/securityRules[*].access\",\n                                \"equals\" : \"Allow\"\n                            },\n                            {\n                                \"field\" : \"Microsoft.Network/networkSecurityGroups/securityRules[*].direction\",\n                                \"equals\" : \"Inbound\"\n                            }\n                        ]\n                    }\n                },\n                \"greater\": 0\n            },\n            \"then\": {\n                    \"effect\": \"deny\"\n            }\n        }\n    }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/AuditNSGPublicRule?api-version=2021-06-01",
-              "protocol": "https",
-              "host": [
-                "management",
-                "azure",
-                "com"
-              ],
-              "path": [
-                "providers",
-                "Microsoft.Management",
-                "managementGroups",
-                "{{MGId}}",
-                "providers",
-                "Microsoft.Authorization",
-                "policyDefinitions",
-                "AuditNSGPublicRule"
               ],
               "query": [
                 {
