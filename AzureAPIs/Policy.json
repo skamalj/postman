@@ -989,6 +989,21 @@
           "item": [
             {
               "name": "AuditNSG",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "3f9d19b7-d859-4e16-9517-194f513be709",
+                    "exec": [
+                      "pm.test(\"Status code is 200 or 204\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "42387164-a1ec-42f1-8984-f9afcad7ffd0",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
