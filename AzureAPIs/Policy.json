@@ -760,43 +760,44 @@
         },
         {
           "name": "Firewall Rule CosmosDB - append",
-          "item": [],
-          "id": "89aebe5e-f742-46e6-8600-ce8c440c14ef"
-        },
-        {
-          "name": "Disable Public Access On CosmosDB",
-          "id": "d2697104-9ced-40bd-abcf-e15235f36576",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/disable-publicaccess-cosmosdb?api-version=2021-06-01",
-              "protocol": "https",
-              "host": [
-                "management",
-                "azure",
-                "com"
-              ],
-              "path": [
-                "subscriptions",
-                "{{subscriptionId}}",
-                "providers",
-                "Microsoft.Authorization",
-                "policyAssignments",
-                "disable-publicaccess-cosmosdb"
-              ],
-              "query": [
-                {
-                  "key": "api-version",
-                  "value": "2021-06-01"
+          "item": [
+            {
+              "name": "Disable Public Access On CosmosDB",
+              "id": "d2697104-9ced-40bd-abcf-e15235f36576",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/disable-publicaccess-cosmosdb?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "{{subscriptionId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyAssignments",
+                    "disable-publicaccess-cosmosdb"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
                 }
-              ]
+              },
+              "response": []
             }
-          },
-          "response": []
+          ],
+          "id": "89aebe5e-f742-46e6-8600-ce8c440c14ef"
         },
         {
           "name": "AuditNSG",
