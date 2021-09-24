@@ -1263,7 +1263,7 @@
               "response": []
             },
             {
-              "name": "NSG Public Rule Definition Copy",
+              "name": "ACR Disable Public Access Definition",
               "event": [
                 {
                   "listen": "test",
