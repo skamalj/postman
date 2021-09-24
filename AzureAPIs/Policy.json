@@ -645,7 +645,9 @@
                   "script": {
                     "id": "c33c33d4-97c0-4ab7-bef3-a724b6758303",
                     "exec": [
-                      ""
+                      "pm.test(\"Status code is 201\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
                     ],
                     "type": "text/javascript"
                   }
@@ -755,6 +757,11 @@
             }
           ],
           "id": "babc6dca-9958-4799-b5f5-c7600dfcfc2e"
+        },
+        {
+          "name": "New Folder",
+          "item": [],
+          "id": "89aebe5e-f742-46e6-8600-ce8c440c14ef"
         },
         {
           "name": "Disable Public Access On CosmosDB",
