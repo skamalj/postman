@@ -1012,7 +1012,7 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/audit-nsg-assignment?api-version=2021-06-01",
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/nsg-public-rule-assignment?api-version=2021-06-01",
                   "protocol": "https",
                   "host": [
                     "management",
@@ -1025,7 +1025,7 @@
                     "providers",
                     "Microsoft.Authorization",
                     "policyAssignments",
-                    "audit-nsg-assignment"
+                    "nsg-public-rule-assignment"
                   ],
                   "query": [
                     {
