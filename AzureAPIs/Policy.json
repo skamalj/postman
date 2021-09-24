@@ -909,7 +909,7 @@
               "response": []
             },
             {
-              "name": "AP -  Disable Publics Access to CosmosDB - Subscription Scope",
+              "name": "Assign - IPRule on CosmosDB",
               "id": "57794f66-648d-4227-b891-add75c7de522",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
