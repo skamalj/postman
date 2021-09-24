@@ -948,7 +948,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"identity\": {\n    \"type\": \"SystemAssigned\"\n  },\n  \"location\": \"centralindia\",\n  \"properties\": {\n    \"displayName\": \"Disable public access to CosmosDB\",\n    \"description\": \"Disable public access to CosmosDB\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/IPRuleOnCosmosDB\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Disable public access to CosmosDB\"\n        }\n    ]\n  }\n}",
+                  "raw": "{\n  \"identity\": {\n    \"type\": \"SystemAssigned\"\n  },\n  \"location\": \"centralindia\",\n  \"properties\": {\n    \"displayName\": \"Enable firewall rule om  CosmosDB\",\n    \"description\": \"DEnable firewall rule om  CosmosDB, this has consequence of disabling public access\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/IPRuleOnCosmosDB\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Enable firewall rule om  CosmosDB\"\n        }\n    ]\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
