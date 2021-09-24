@@ -985,6 +985,11 @@
           "id": "89aebe5e-f742-46e6-8600-ce8c440c14ef"
         },
         {
+          "name": "New Folder",
+          "item": [],
+          "id": "8c60d95a-3758-4036-b742-23450c24bdc0"
+        },
+        {
           "name": "AuditNSG",
           "id": "42387164-a1ec-42f1-8984-f9afcad7ffd0",
           "protocolProfileBehavior": {
