@@ -436,7 +436,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Enforce encryption on storage Accounts\",\n    \"mode\": \"Indexed\",\n    \"description\": \"This policy enables you to enforce encryption on Storage Accounts\",\n    \"metadata\": {\n      \"version\": \"1.0.0\",\n      \"category\": \"Storage\"\n    },\n    \"policyRule\": {\n      \"if\": {\n        \"allOf\": [\n          {\n            \"field\": \"type\",\n            \"equals\": \"Microsoft.Storage/storageAccounts\"\n          },\n          {\n            \"not\": {\n              \"field\": \"Microsoft.Storage/storageAccounts/encryption.keySource\",\n              \"equals\": \"Microsoft.Keyvault\"\n            }\n          }\n        ]\n      },\n      \"then\": {\n        \"effect\": \"Deny\"\n      }\n    }\n  },\n  \"name\": \"sorageAccountIsEncrypted\"\n}",
+                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Enforce encryption on storage Accounts\",\n    \"mode\": \"Indexed\",\n    \"description\": \"This policy enables you to enforce encryption on Storage Accounts\",\n    \"metadata\": {\n      \"version\": \"1.0.0\",\n      \"category\": \"Storage\"\n    },\n    \"policyRule\": {\n      \"if\": {\n        \"allOf\": [\n          {\n            \"field\": \"type\",\n            \"equals\": \"Microsoft.Storage/storageAccounts\"\n          },\n          {\n            \"not\": {\n              \"field\": \"Microsoft.Storage/storageAccounts/encryption.keySource\",\n              \"equals\": \"Microsoft.Keyvault\"\n            }\n          }\n        ]\n      },\n      \"then\": {\n        \"effect\": \"Deny\"\n      }\n    }\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -444,7 +444,7 @@
                   }
                 },
                 "url": {
-                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/sorageAccountIsEncrypted?api-version=2021-06-01",
+                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/StorageAccountIsEncrypted?api-version=2021-06-01",
                   "protocol": "https",
                   "host": [
                     "management",
@@ -459,7 +459,7 @@
                     "providers",
                     "Microsoft.Authorization",
                     "policyDefinitions",
-                    "sorageAccountIsEncrypted"
+                    "StorageAccountIsEncrypted"
                   ],
                   "query": [
                     {
