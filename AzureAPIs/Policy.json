@@ -9,8 +9,675 @@
       "name": "Policy",
       "item": [
         {
+          "name": "LA Workspace - DeployIfNotExists",
+          "item": [
+            {
+              "name": "LA Workspace Assignment",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "7a4b98ca-4ba6-4c4e-8a28-1436c528ee98",
+                    "exec": [
+                      "pm.test(\"Status code is 200 or 204\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "f2f0848c-54e2-4409-88df-1b4b843fe378",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/create-la-workspace-assignment?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "{{subscriptionId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyAssignments",
+                    "create-la-workspace-assignment"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "LA Workspace Definition",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "5c2166ba-e161-4244-ad76-b2364c45a74b",
+                    "exec": [
+                      "pm.test(\"Status code is 200 or 204\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "9f34378f-b153-4590-ac0b-611037d70d8f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/CreateLogAnalyticsWorkspace?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "providers",
+                    "Microsoft.Management",
+                    "managementGroups",
+                    "{{MGId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyDefinitions",
+                    "CreateLogAnalyticsWorkspace"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Define - LA Workspace",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "452987b9-190c-4e79-8ac0-766c985effb8",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "9ca7c968-b35e-4343-82a2-b60b6ea700b5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Create LA workspace in subscription\",\n    \"mode\": \"Indexed\",\n    \"description\": \"Create LA workspace in subscription, if not exists\",\n    \"metadata\": {\n      \"version\": \"1.0.0\",\n      \"category\": \"OperationalInsights\"\n    },\n    \"policyRule\": {\n      \"if\": {\n          \"field\": \"type\",\n          \"equals\": \"Microsoft.Compute/virtualMachines\"\n      },\n      \"then\": {\n        \"effect\": \"DeployIfNotExists\",\n        \"details\" : {\n            \"type\": \"Microsoft.OperationalInsights/workspaces\",\n            \"name\": \"centrallaworkspace\",\n            \"resourceGroupName\": \"myrg\",\n            \"evaluationDelay\": \"PT0M\",\n            \"existenceScope\": \"ResourceGroup\",\n            \"roleDefinitionIds\": [\n                \"/subscriptions/3f735773-a15a-41bf-bcb9-0217a1a1b07d/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\n            ],\n            \"Deployment\": {\n                \"properties\" :{\n                    \"mode\": \"incremental\",\n                    \"template\": {\n                        \"$schema\": \"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#\",\n                        \"contentVersion\": \"1.0.0.0\",\n                        \"resources\": [\n                            {\n                                  \"type\": \"Microsoft.OperationalInsights/workspaces\",\n                                  \"apiVersion\": \"2021-06-01\",\n                                  \"name\": \"centrallaworkspace\",\n                                  \"location\": \"centralindia\",\n                                  \"retentionDays\": 30,\n                                  \"sku\": {\n                                      \"name\": \"Free\"\n                                  }\n                            }\n                        ]\n                    }\n                }\n            }\n\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/CreateLogAnalyticsWorkspace?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "providers",
+                    "Microsoft.Management",
+                    "managementGroups",
+                    "{{MGId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyDefinitions",
+                    "CreateLogAnalyticsWorkspace"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Assign - LA workspace",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "2b4ecb1b-bedc-4d8b-9db4-a6582248ad93",
+                    "exec": [
+                      "principal = pm.response.json().identity.principalId",
+                      "pm.environment.set(\"principalId\", principal)",
+                      "pm.test(\"Status code is 201\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "86dd98b8-51e4-46dc-83c6-18f1601dc5ac",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identity\": {\n    \"type\": \"SystemAssigned\"\n  },\n  \"location\": \"centralindia\",\n  \"properties\": {\n    \"displayName\": \"Create LA workspace\",\n    \"description\": \"Create LA workspace\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/CreateLogAnalyticsWorkspace\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Central LA workspace does not exist\"\n        }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/create-la-workspace-assignment?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "{{subscriptionId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyAssignments",
+                    "create-la-workspace-assignment"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Assign Role to Managed identity",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "d10058ab-805f-4e33-a713-b8e555e1976a",
+                    "exec": [
+                      "uuid = require('uuid')",
+                      "pm.environment.set(\"roleGuid\",uuid.v4());",
+                      "setTimeout(function(){}, 5000)"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "ca8834fa-44cf-41f9-a0ac-e1c901c835f4",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "feaf58e8-2a7a-46fc-91f5-b81c5a0e6dc1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"roleDefinitionId\": \"/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\",\n    \"principalId\": \"{{principalId}}\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/roleAssignments/{{roleGuid}}?api-version=2015-07-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "{{subscriptionId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "roleAssignments",
+                    "{{roleGuid}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2015-07-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "8cb86157-941b-46aa-a612-6cabf421ca7b"
+        },
+        {
+          "name": "Storage Encryption - deny",
+          "item": [
+            {
+              "name": "Storage Account  Encrypted Assignment",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "0757c814-8e03-454f-bd35-466af09cc3e1",
+                    "exec": [
+                      "pm.test(\"Status code is 200 or 204\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "d4ca3961-139a-4b61-9104-3aa2270e131e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/storage-account-encrypted-assignment?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "{{subscriptionId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyAssignments",
+                    "storage-account-encrypted-assignment"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Storage Account Encrypted Definition",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "0ca8d4d5-da93-4d1e-8b9f-50a4e4bc9ae6",
+                    "exec": [
+                      "pm.test(\"Status code is 200 or 204\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "59ee431d-b6ed-4848-af2c-d90647f7a2bc",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/sorageAccountIsEncrypted?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "providers",
+                    "Microsoft.Management",
+                    "managementGroups",
+                    "{{MGId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyDefinitions",
+                    "sorageAccountIsEncrypted"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Define - StorageAccount is encrypted",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "dbcce051-7509-4e69-8425-f4efe646f000",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "4a98face-c914-4632-bc90-1c2c83ffa7a1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Enforce encryption on storage Accounts\",\n    \"mode\": \"Indexed\",\n    \"description\": \"This policy enables you to enforce encryption on Storage Accounts\",\n    \"metadata\": {\n      \"version\": \"1.0.0\",\n      \"category\": \"Storage\"\n    },\n    \"policyRule\": {\n      \"if\": {\n        \"allOf\": [\n          {\n            \"field\": \"type\",\n            \"equals\": \"Microsoft.Storage/storageAccounts\"\n          },\n          {\n            \"not\": {\n              \"field\": \"Microsoft.Storage/storageAccounts/encryption.keySource\",\n              \"equals\": \"Microsoft.Keyvault\"\n            }\n          }\n        ]\n      },\n      \"then\": {\n        \"effect\": \"Deny\"\n      }\n    }\n  },\n  \"name\": \"sorageAccountIsEncrypted\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/sorageAccountIsEncrypted?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "providers",
+                    "Microsoft.Management",
+                    "managementGroups",
+                    "{{MGId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyDefinitions",
+                    "sorageAccountIsEncrypted"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Assign  - Storage Account Encrypted",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "43b60bc2-b55e-4790-801c-abcb6273bc85",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "cef1a8ca-1459-4e2d-a521-9d87e1eb69ae",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Enforce storage accounts to be encrypted\",\n    \"description\": \"All storage accounts in subscription must be encrypted\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/sorageAccountIsEncrypted\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Storage account must be encrypted\"\n        }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/storage-account-encrypted-assignment?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "{{subscriptionId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyAssignments",
+                    "storage-account-encrypted-assignment"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "4ad7176f-c662-40f4-9c0d-f2b24984f1af"
+        },
+        {
+          "name": "Location - deny",
+          "item": [
+            {
+              "name": "Location Assignment",
+              "id": "4e04e2ae-2c5a-4a42-80d8-4b47c10a0f80",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/location-policy-assignment?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "{{subscriptionId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyAssignments",
+                    "location-policy-assignment"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Define - Location Policy",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "c33c33d4-97c0-4ab7-bef3-a724b6758303",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "9bcbc739-3014-41d8-b696-ff78704fc0cf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"properties\": {\n        \"displayName\": \"Allowed locations\",\n        \"description\": \"This policy enables you to restrict the locations your organization can specify when deploying resources.\",\n        \"mode\": \"Indexed\",\n        \"metadata\": {\n            \"version\": \"1.0.0\",\n            \"category\": \"Locations\"\n        },\n        \"parameters\": {\n            \"allowedLocations\": {\n                \"type\": \"array\",\n                \"metadata\": {\n                    \"description\": \"The list of locations that can be specified when deploying resources\",\n                    \"strongType\": \"location\",\n                    \"displayName\": \"Allowed locations\"\n                },\n                \"defaultValue\": [ \"centralindia\" , \"eastus\"],\n                \"allowedValues\": [\n                    \"eastus\",\n                    \"centralindia\",\n                    \"westus\"\n                ]\n            }\n        },\n        \"policyRule\": {\n            \"if\": {\n                \"not\": {\n                    \"field\": \"location\",\n                    \"in\": \"[parameters('allowedLocations')]\"\n                }\n            },\n            \"then\": {\n                \"effect\": \"deny\"\n            }\n        }\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/myLocationPolicy?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "providers",
+                    "Microsoft.Management",
+                    "managementGroups",
+                    "{{MGId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyDefinitions",
+                    "myLocationPolicy"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Assign - Location  Policy",
+              "id": "095f6b64-9281-461e-8a52-dae5ea7af1c2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Restrict location of resources\",\n    \"description\": \"All resources must be in  location - centralindia or eastus\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/myLocationPolicy\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"All resources must be in  location - centralindia or eastus\"\n        }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/location-policy-assignment?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "{{subscriptionId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyAssignments",
+                    "location-policy-assignment"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "babc6dca-9958-4799-b5f5-c7600dfcfc2e"
+        },
+        {
           "name": "Disable Public Access On CosmosDB",
-          "_postman_id": "d2697104-9ced-40bd-abcf-e15235f36576",
+          "id": "d2697104-9ced-40bd-abcf-e15235f36576",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -45,7 +712,7 @@
         },
         {
           "name": "AuditNSG",
-          "_postman_id": "42387164-a1ec-42f1-8984-f9afcad7ffd0",
+          "id": "42387164-a1ec-42f1-8984-f9afcad7ffd0",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -80,7 +747,7 @@
         },
         {
           "name": "ACR Retention Policy",
-          "_postman_id": "d731a6bf-3b08-433c-be65-86c980760e93",
+          "id": "d731a6bf-3b08-433c-be65-86c980760e93",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -115,7 +782,7 @@
         },
         {
           "name": "VM Managed Disks",
-          "_postman_id": "5ad24252-28b3-4029-a523-e6da4dba5105",
+          "id": "5ad24252-28b3-4029-a523-e6da4dba5105",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -149,136 +816,8 @@
           "response": []
         },
         {
-          "name": "Storage Account Encrypted",
-          "_postman_id": "d4ca3961-139a-4b61-9104-3aa2270e131e",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/storage-account-encrypted-assignment?api-version=2021-06-01",
-              "protocol": "https",
-              "host": [
-                "management",
-                "azure",
-                "com"
-              ],
-              "path": [
-                "subscriptions",
-                "{{subscriptionId}}",
-                "providers",
-                "Microsoft.Authorization",
-                "policyAssignments",
-                "storage-account-encrypted-assignment"
-              ],
-              "query": [
-                {
-                  "key": "api-version",
-                  "value": "2021-06-01"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Restrict Location",
-          "_postman_id": "4e04e2ae-2c5a-4a42-80d8-4b47c10a0f80",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/location-policy-assignment?api-version=2021-06-01",
-              "protocol": "https",
-              "host": [
-                "management",
-                "azure",
-                "com"
-              ],
-              "path": [
-                "subscriptions",
-                "{{subscriptionId}}",
-                "providers",
-                "Microsoft.Authorization",
-                "policyAssignments",
-                "location-policy-assignment"
-              ],
-              "query": [
-                {
-                  "key": "api-version",
-                  "value": "2021-06-01"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "PD - Location Policy",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "id": "c33c33d4-97c0-4ab7-bef3-a724b6758303",
-                "exec": [
-                  ""
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "_postman_id": "9bcbc739-3014-41d8-b696-ff78704fc0cf",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"properties\": {\n        \"displayName\": \"Allowed locations\",\n        \"description\": \"This policy enables you to restrict the locations your organization can specify when deploying resources.\",\n        \"mode\": \"Indexed\",\n        \"metadata\": {\n            \"version\": \"1.0.0\",\n            \"category\": \"Locations\"\n        },\n        \"parameters\": {\n            \"allowedLocations\": {\n                \"type\": \"array\",\n                \"metadata\": {\n                    \"description\": \"The list of locations that can be specified when deploying resources\",\n                    \"strongType\": \"location\",\n                    \"displayName\": \"Allowed locations\"\n                },\n                \"defaultValue\": [ \"centralindia\" , \"eastus\"],\n                \"allowedValues\": [\n                    \"eastus\",\n                    \"centralindia\",\n                    \"westus\"\n                ]\n            }\n        },\n        \"policyRule\": {\n            \"if\": {\n                \"not\": {\n                    \"field\": \"location\",\n                    \"in\": \"[parameters('allowedLocations')]\"\n                }\n            },\n            \"then\": {\n                \"effect\": \"deny\"\n            }\n        }\n    }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/myLocationPolicy?api-version=2021-06-01",
-              "protocol": "https",
-              "host": [
-                "management",
-                "azure",
-                "com"
-              ],
-              "path": [
-                "providers",
-                "Microsoft.Management",
-                "managementGroups",
-                "{{MGId}}",
-                "providers",
-                "Microsoft.Authorization",
-                "policyDefinitions",
-                "myLocationPolicy"
-              ],
-              "query": [
-                {
-                  "key": "api-version",
-                  "value": "2021-06-01"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
           "name": "PD - Audit NSG for public access",
-          "_postman_id": "480dec4b-27ff-4a16-9159-a5b6923fe8e9",
+          "id": "480dec4b-27ff-4a16-9159-a5b6923fe8e9",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -323,54 +862,8 @@
           "response": []
         },
         {
-          "name": "PD - StorageAccount is encrypted",
-          "_postman_id": "4a98face-c914-4632-bc90-1c2c83ffa7a1",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"properties\": {\n    \"displayName\": \"Enforce encryption on storage Accounts\",\n    \"mode\": \"Indexed\",\n    \"description\": \"This policy enables you to enforce encryption on Storage Accounts\",\n    \"metadata\": {\n      \"version\": \"1.0.0\",\n      \"category\": \"Storage\"\n    },\n    \"policyRule\": {\n      \"if\": {\n        \"allOf\": [\n          {\n            \"field\": \"type\",\n            \"equals\": \"Microsoft.Storage/storageAccounts\"\n          },\n          {\n            \"not\": {\n              \"field\": \"Microsoft.Storage/storageAccounts/encryption.keySource\",\n              \"equals\": \"Microsoft.Keyvault\"\n            }\n          }\n        ]\n      },\n      \"then\": {\n        \"effect\": \"Deny\"\n      }\n    }\n  },\n  \"name\": \"sorageAccountIsEncrypted\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/sorageAccountIsEncrypted?api-version=2021-06-01",
-              "protocol": "https",
-              "host": [
-                "management",
-                "azure",
-                "com"
-              ],
-              "path": [
-                "providers",
-                "Microsoft.Management",
-                "managementGroups",
-                "{{MGId}}",
-                "providers",
-                "Microsoft.Authorization",
-                "policyDefinitions",
-                "sorageAccountIsEncrypted"
-              ],
-              "query": [
-                {
-                  "key": "api-version",
-                  "value": "2021-06-01"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "PD - ACR has retention policy",
-          "_postman_id": "58f18c4c-0288-4d66-a817-98fbcb56b3c8",
+          "name": "PD - ACR is Private policy",
+          "id": "58f18c4c-0288-4d66-a817-98fbcb56b3c8",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -416,7 +909,7 @@
         },
         {
           "name": "PD - Disable Publics Access to CosmosDB - Append",
-          "_postman_id": "3a7f0275-0ea6-447d-98a9-d80f7e098d52",
+          "id": "3a7f0275-0ea6-447d-98a9-d80f7e098d52",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -462,7 +955,7 @@
         },
         {
           "name": "AP - VMs without managed Disks",
-          "_postman_id": "e3949635-c1eb-47e4-8ba0-e3dd71e82750",
+          "id": "e3949635-c1eb-47e4-8ba0-e3dd71e82750",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -505,96 +998,8 @@
           "response": []
         },
         {
-          "name": "AP - Location - Subscription Scope",
-          "_postman_id": "095f6b64-9281-461e-8a52-dae5ea7af1c2",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"properties\": {\n    \"displayName\": \"Restrict location of resources\",\n    \"description\": \"All resources must be in  location - centralindia or eastus\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/myLocationPolicy\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"All resources must be in  location - centralindia or eastus\"\n        }\n    ]\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/location-policy-assignment?api-version=2021-06-01",
-              "protocol": "https",
-              "host": [
-                "management",
-                "azure",
-                "com"
-              ],
-              "path": [
-                "subscriptions",
-                "{{subscriptionId}}",
-                "providers",
-                "Microsoft.Authorization",
-                "policyAssignments",
-                "location-policy-assignment"
-              ],
-              "query": [
-                {
-                  "key": "api-version",
-                  "value": "2021-06-01"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "AP  - Storage Account is Encrypted - Subscription Scope",
-          "_postman_id": "cef1a8ca-1459-4e2d-a521-9d87e1eb69ae",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"properties\": {\n    \"displayName\": \"Enforce storage accounts to be encrypted\",\n    \"description\": \"All storage accounts in subscription must be encrypted\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/sorageAccountIsEncrypted\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Storage account must be encrypted\"\n        }\n    ]\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/storage-account-encrypted-assignment?api-version=2021-06-01",
-              "protocol": "https",
-              "host": [
-                "management",
-                "azure",
-                "com"
-              ],
-              "path": [
-                "subscriptions",
-                "{{subscriptionId}}",
-                "providers",
-                "Microsoft.Authorization",
-                "policyAssignments",
-                "storage-account-encrypted-assignment"
-              ],
-              "query": [
-                {
-                  "key": "api-version",
-                  "value": "2021-06-01"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
           "name": "AP  - ACR retention policy- Subscription Scope",
-          "_postman_id": "de58386b-1db6-4c1b-b0d0-cfb4c6802335",
+          "id": "de58386b-1db6-4c1b-b0d0-cfb4c6802335",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -638,7 +1043,7 @@
         },
         {
           "name": "AP  - NSG Audit - Subscription Scope",
-          "_postman_id": "fff6e241-de53-4c6b-be82-ec6cd74bda26",
+          "id": "fff6e241-de53-4c6b-be82-ec6cd74bda26",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -682,7 +1087,7 @@
         },
         {
           "name": "AP -  Disable Publics Access to CosmosDB - Subscription Scope",
-          "_postman_id": "57794f66-648d-4227-b891-add75c7de522",
+          "id": "57794f66-648d-4227-b891-add75c7de522",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -725,14 +1130,14 @@
           "response": []
         }
       ],
-      "_postman_id": "0c47dccd-99e1-4f53-a78a-5a6144d27cbd"
+      "id": "0c47dccd-99e1-4f53-a78a-5a6144d27cbd"
     },
     {
       "name": "BluePrints",
       "item": [
         {
           "name": "Add Blueprint",
-          "_postman_id": "1977ab15-5e3a-4b7d-93f2-787ab62c7692",
+          "id": "1977ab15-5e3a-4b7d-93f2-787ab62c7692",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -778,7 +1183,7 @@
         },
         {
           "name": "Add roleAssignment Artifact to BluePrint",
-          "_postman_id": "48dfdd4d-2f24-4b71-ade8-e10e12c59b7b",
+          "id": "48dfdd4d-2f24-4b71-ade8-e10e12c59b7b",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -826,7 +1231,7 @@
         },
         {
           "name": "Add policy Assignment to BluePrint - RG Tags",
-          "_postman_id": "5dee48cb-ef59-42a0-ba1d-533b62e4b950",
+          "id": "5dee48cb-ef59-42a0-ba1d-533b62e4b950",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -874,7 +1279,7 @@
         },
         {
           "name": "Add Policy Assignment to Blueprint - Add Storage Tags",
-          "_postman_id": "8b49848e-6f1d-4958-b18f-00130c83a302",
+          "id": "8b49848e-6f1d-4958-b18f-00130c83a302",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -921,7 +1326,7 @@
           "response": []
         }
       ],
-      "_postman_id": "8487fccd-66a2-49bb-b101-22b60e7c7600"
+      "id": "8487fccd-66a2-49bb-b101-22b60e7c7600"
     },
     {
       "name": "Misc",
@@ -947,7 +1352,7 @@
               }
             }
           ],
-          "_postman_id": "81bd6021-e0ca-47e0-93f0-6d7d438a1643",
+          "id": "81bd6021-e0ca-47e0-93f0-6d7d438a1643",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -979,7 +1384,7 @@
         },
         {
           "name": "Get Aliases",
-          "_postman_id": "0e92d806-5281-4b04-8252-99bae53e7c0d",
+          "id": "0e92d806-5281-4b04-8252-99bae53e7c0d",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -991,7 +1396,7 @@
           "response": []
         }
       ],
-      "_postman_id": "6bba1b07-c2c6-40c8-a4d1-b4ec19570582"
+      "id": "6bba1b07-c2c6-40c8-a4d1-b4ec19570582"
     }
   ],
   "auth": {
