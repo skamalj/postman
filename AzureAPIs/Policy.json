@@ -1090,7 +1090,7 @@
               "response": []
             },
             {
-              "name": "PD - Audit NSG for public access",
+              "name": "Define - NSG Public Rule",
               "event": [
                 {
                   "listen": "test",
