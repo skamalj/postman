@@ -302,76 +302,6 @@
                 }
               },
               "response": []
-            },
-            {
-              "name": "Assign Role to Managed identity Copy",
-              "event": [
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "id": "b70f4124-baa8-4abf-b52a-a53e727b8053",
-                    "exec": [
-                      "uuid = require('uuid')",
-                      "pm.environment.set(\"roleGuid\",uuid.v4());",
-                      "setTimeout(function(){}, 5000)"
-                    ],
-                    "type": "text/javascript"
-                  }
-                },
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "8dc4b313-322c-4475-9adb-163d0043499d",
-                    "exec": [
-                      "pm.test(\"Status code is 201\", function () {",
-                      "    pm.response.to.have.status(201);",
-                      "});"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "id": "c65d1204-fb31-4c1f-a2a2-e95d46d91826",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "PUT",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"properties\": {\n    \"roleDefinitionId\": \"/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\",\n    \"principalId\": \"{{principalId}}\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/roleAssignments/{{roleGuid}}?api-version=2015-07-01",
-                  "protocol": "https",
-                  "host": [
-                    "management",
-                    "azure",
-                    "com"
-                  ],
-                  "path": [
-                    "subscriptions",
-                    "{{subscriptionId}}",
-                    "providers",
-                    "Microsoft.Authorization",
-                    "roleAssignments",
-                    "{{roleGuid}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "api-version",
-                      "value": "2015-07-01"
-                    }
-                  ]
-                }
-              },
-              "response": []
             }
           ],
           "id": "8cb86157-941b-46aa-a612-6cabf421ca7b"
@@ -1496,6 +1426,76 @@
                     {
                       "key": "api-version",
                       "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Assign Role to Managed identity Copy",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "b70f4124-baa8-4abf-b52a-a53e727b8053",
+                    "exec": [
+                      "uuid = require('uuid')",
+                      "pm.environment.set(\"roleGuid\",uuid.v4());",
+                      "setTimeout(function(){}, 5000)"
+                    ],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "8dc4b313-322c-4475-9adb-163d0043499d",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "c65d1204-fb31-4c1f-a2a2-e95d46d91826",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"properties\": {\n    \"roleDefinitionId\": \"/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\",\n    \"principalId\": \"{{principalId}}\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/roleAssignments/{{roleGuid}}?api-version=2015-07-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "{{subscriptionId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "roleAssignments",
+                    "{{roleGuid}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2015-07-01"
                     }
                   ]
                 }
