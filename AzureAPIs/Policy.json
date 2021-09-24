@@ -910,6 +910,20 @@
             },
             {
               "name": "Assign - IPRule on CosmosDB",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "8aeca8f1-5586-486b-a132-8ff30597a9f0",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "57794f66-648d-4227-b891-add75c7de522",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
@@ -919,7 +933,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"identity\": {\n    \"type\": \"SystemAssigned\"\n  },\n  \"location\": \"centralindia\",\n  \"properties\": {\n    \"displayName\": \"Disable public access to CosmosDB\",\n    \"description\": \"Disable public access to CosmosDB\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/DisablePublicAccessOnCosmosDB\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Disable public access to CosmosDB\"\n        }\n    ]\n  }\n}",
+                  "raw": "{\n  \"identity\": {\n    \"type\": \"SystemAssigned\"\n  },\n  \"location\": \"centralindia\",\n  \"properties\": {\n    \"displayName\": \"Disable public access to CosmosDB\",\n    \"description\": \"Disable public access to CosmosDB\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/IPRuleOnCosmosDB\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Disable public access to CosmosDB\"\n        }\n    ]\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -927,7 +941,7 @@
                   }
                 },
                 "url": {
-                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/disable-publicaccess-cosmosdb?api-version=2021-06-01",
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/iprule-on-cosmosdb?api-version=2021-06-01",
                   "protocol": "https",
                   "host": [
                     "management",
@@ -940,7 +954,7 @@
                     "providers",
                     "Microsoft.Authorization",
                     "policyAssignments",
-                    "disable-publicaccess-cosmosdb"
+                    "iprule-on-cosmosdb"
                   ],
                   "query": [
                     {
