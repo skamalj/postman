@@ -986,43 +986,44 @@
         },
         {
           "name": "NSG Public Rule - deny",
-          "item": [],
-          "id": "8c60d95a-3758-4036-b742-23450c24bdc0"
-        },
-        {
-          "name": "AuditNSG",
-          "id": "42387164-a1ec-42f1-8984-f9afcad7ffd0",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/audit-nsg-assignment?api-version=2021-06-01",
-              "protocol": "https",
-              "host": [
-                "management",
-                "azure",
-                "com"
-              ],
-              "path": [
-                "subscriptions",
-                "{{subscriptionId}}",
-                "providers",
-                "Microsoft.Authorization",
-                "policyAssignments",
-                "audit-nsg-assignment"
-              ],
-              "query": [
-                {
-                  "key": "api-version",
-                  "value": "2021-06-01"
+          "item": [
+            {
+              "name": "AuditNSG",
+              "id": "42387164-a1ec-42f1-8984-f9afcad7ffd0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/audit-nsg-assignment?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "{{subscriptionId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyAssignments",
+                    "audit-nsg-assignment"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
                 }
-              ]
+              },
+              "response": []
             }
-          },
-          "response": []
+          ],
+          "id": "8c60d95a-3758-4036-b742-23450c24bdc0"
         },
         {
           "name": "ACR Retention Policy",
