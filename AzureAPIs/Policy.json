@@ -759,7 +759,7 @@
           "id": "babc6dca-9958-4799-b5f5-c7600dfcfc2e"
         },
         {
-          "name": "Firewall Rule CosmosDB - append",
+          "name": "IPRule CosmosDB - append",
           "item": [
             {
               "name": "Disable Public Access On CosmosDB",
