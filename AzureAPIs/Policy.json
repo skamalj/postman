@@ -759,11 +759,6 @@
           "id": "babc6dca-9958-4799-b5f5-c7600dfcfc2e"
         },
         {
-          "name": "New Folder",
-          "item": [],
-          "id": "89aebe5e-f742-46e6-8600-ce8c440c14ef"
-        },
-        {
           "name": "Disable Public Access On CosmosDB",
           "id": "d2697104-9ced-40bd-abcf-e15235f36576",
           "protocolProfileBehavior": {
