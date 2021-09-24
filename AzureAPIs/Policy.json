@@ -496,7 +496,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Enforce storage accounts to be encrypted\",\n    \"description\": \"All storage accounts in subscription must be encrypted\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/StorageAccountIsEncrypted\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Storage account must be encrypted\"\n        }\n    ]\n  }\n}",
+                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Enforce storage accounts to be encrypted with KMS\",\n    \"description\": \"All storage accounts in subscription must be encrypted with KMS\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/StorageAccountIsEncrypted\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Storage account must be encrypted with KMS\"\n        }\n    ]\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
