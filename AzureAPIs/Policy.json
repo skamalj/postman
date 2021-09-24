@@ -1293,53 +1293,53 @@
                 }
               },
               "response": []
-            },
-            {
-              "name": "AP  - ACR retention policy- Subscription Scope",
-              "id": "de58386b-1db6-4c1b-b0d0-cfb4c6802335",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "PUT",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"identity\": {\n    \"type\": \"SystemAssigned\"\n  },\n  \"location\": \"centralindia\",\n  \"properties\": {\n    \"displayName\": \"ACR has retention policy\",\n    \"description\": \"Enable retention policy on ACR\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/acrHasRetentionPolicy\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"ACR must have retention policy\"\n        }\n    ]\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/acr-retention-policy-assignment?api-version=2021-06-01",
-                  "protocol": "https",
-                  "host": [
-                    "management",
-                    "azure",
-                    "com"
-                  ],
-                  "path": [
-                    "subscriptions",
-                    "{{subscriptionId}}",
-                    "providers",
-                    "Microsoft.Authorization",
-                    "policyAssignments",
-                    "acr-retention-policy-assignment"
-                  ],
-                  "query": [
-                    {
-                      "key": "api-version",
-                      "value": "2021-06-01"
-                    }
-                  ]
-                }
-              },
-              "response": []
             }
           ],
           "id": "2b74d62b-8d22-4181-82df-b895e787ce0a"
+        },
+        {
+          "name": "AP  - ACR retention policy- Subscription Scope",
+          "id": "de58386b-1db6-4c1b-b0d0-cfb4c6802335",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identity\": {\n    \"type\": \"SystemAssigned\"\n  },\n  \"location\": \"centralindia\",\n  \"properties\": {\n    \"displayName\": \"ACR has retention policy\",\n    \"description\": \"Enable retention policy on ACR\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/acrHasRetentionPolicy\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"ACR must have retention policy\"\n        }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/acr-retention-policy-assignment?api-version=2021-06-01",
+              "protocol": "https",
+              "host": [
+                "management",
+                "azure",
+                "com"
+              ],
+              "path": [
+                "subscriptions",
+                "{{subscriptionId}}",
+                "providers",
+                "Microsoft.Authorization",
+                "policyAssignments",
+                "acr-retention-policy-assignment"
+              ],
+              "query": [
+                {
+                  "key": "api-version",
+                  "value": "2021-06-01"
+                }
+              ]
+            }
+          },
+          "response": []
         }
       ],
       "id": "0c47dccd-99e1-4f53-a78a-5a6144d27cbd"
