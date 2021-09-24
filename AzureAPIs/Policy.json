@@ -1212,43 +1212,44 @@
         },
         {
           "name": "ACR Disable Public Access",
-          "item": [],
-          "id": "2b74d62b-8d22-4181-82df-b895e787ce0a"
-        },
-        {
-          "name": "ACR Retention Policy",
-          "id": "d731a6bf-3b08-433c-be65-86c980760e93",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/acr-retention-policy-assignment?api-version=2021-06-01",
-              "protocol": "https",
-              "host": [
-                "management",
-                "azure",
-                "com"
-              ],
-              "path": [
-                "subscriptions",
-                "{{subscriptionId}}",
-                "providers",
-                "Microsoft.Authorization",
-                "policyAssignments",
-                "acr-retention-policy-assignment"
-              ],
-              "query": [
-                {
-                  "key": "api-version",
-                  "value": "2021-06-01"
+          "item": [
+            {
+              "name": "ACR Retention Policy",
+              "id": "d731a6bf-3b08-433c-be65-86c980760e93",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/acr-retention-policy-assignment?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "{{subscriptionId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyAssignments",
+                    "acr-retention-policy-assignment"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
                 }
-              ]
+              },
+              "response": []
             }
-          },
-          "response": []
+          ],
+          "id": "2b74d62b-8d22-4181-82df-b895e787ce0a"
         },
         {
           "name": "PD - ACR is Private policy",
