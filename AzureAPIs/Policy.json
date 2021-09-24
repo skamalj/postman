@@ -1249,7 +1249,7 @@
               "response": []
             },
             {
-              "name": "PD - ACR is Private policy",
+              "name": "Define  - ACR Disable Public Access",
               "id": "58f18c4c-0288-4d66-a817-98fbcb56b3c8",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
