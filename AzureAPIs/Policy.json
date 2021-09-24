@@ -1375,7 +1375,7 @@
               "response": []
             },
             {
-              "name": "AP  - ACR retention policy- Subscription Scope",
+              "name": "Assign - ACR Disable Public Access",
               "event": [
                 {
                   "listen": "test",
