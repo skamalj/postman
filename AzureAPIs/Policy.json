@@ -1038,7 +1038,7 @@
               "response": []
             },
             {
-              "name": "IPRule CosmosDB Definition Copy",
+              "name": "NSG Public Rule Definition",
               "event": [
                 {
                   "listen": "test",
