@@ -1151,6 +1151,20 @@
             },
             {
               "name": "AP  - NSG Audit - Subscription Scope",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "c91a02ef-961c-4b72-bdf3-b45805424872",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "fff6e241-de53-4c6b-be82-ec6cd74bda26",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
@@ -1160,7 +1174,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Audit NSG for public rule - Ingress\",\n    \"description\": \"Audit NSG for public rule - Ingress\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/AuditNSGPublicRule\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Ingress rule cannot have source as 0.0.0.0/0 or *\"\n        }\n    ]\n  }\n}",
+                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Audit NSG for public rule - Ingress\",\n    \"description\": \"Audit NSG for public rule - Ingress\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/NSGPublicRule\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Ingress rule cannot have source as 0.0.0.0/0 or *\"\n        }\n    ]\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -1168,7 +1182,7 @@
                   }
                 },
                 "url": {
-                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/audit-nsg-assignment?api-version=2021-06-01",
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/nsg-public-rule-assignment?api-version=2021-06-01",
                   "protocol": "https",
                   "host": [
                     "management",
@@ -1181,7 +1195,7 @@
                     "providers",
                     "Microsoft.Authorization",
                     "policyAssignments",
-                    "audit-nsg-assignment"
+                    "nsg-public-rule-assignment"
                   ],
                   "query": [
                     {
