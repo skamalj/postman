@@ -762,50 +762,6 @@
           "name": "Firewall Rule CosmosDB - append",
           "item": [
             {
-              "name": "AP -  Disable Publics Access to CosmosDB - Subscription Scope",
-              "id": "57794f66-648d-4227-b891-add75c7de522",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "PUT",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"identity\": {\n    \"type\": \"SystemAssigned\"\n  },\n  \"location\": \"centralindia\",\n  \"properties\": {\n    \"displayName\": \"Disable public access to CosmosDB\",\n    \"description\": \"Disable public access to CosmosDB\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/DisablePublicAccessOnCosmosDB\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Disable public access to CosmosDB\"\n        }\n    ]\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/disable-publicaccess-cosmosdb?api-version=2021-06-01",
-                  "protocol": "https",
-                  "host": [
-                    "management",
-                    "azure",
-                    "com"
-                  ],
-                  "path": [
-                    "subscriptions",
-                    "{{subscriptionId}}",
-                    "providers",
-                    "Microsoft.Authorization",
-                    "policyAssignments",
-                    "disable-publicaccess-cosmosdb"
-                  ],
-                  "query": [
-                    {
-                      "key": "api-version",
-                      "value": "2021-06-01"
-                    }
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
               "name": "Disable Public Access On CosmosDB",
               "id": "d2697104-9ced-40bd-abcf-e15235f36576",
               "protocolProfileBehavior": {
@@ -875,6 +831,50 @@
                     "Microsoft.Authorization",
                     "policyDefinitions",
                     "DisablePublicAccessOnCosmosDB"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "AP -  Disable Publics Access to CosmosDB - Subscription Scope",
+              "id": "57794f66-648d-4227-b891-add75c7de522",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identity\": {\n    \"type\": \"SystemAssigned\"\n  },\n  \"location\": \"centralindia\",\n  \"properties\": {\n    \"displayName\": \"Disable public access to CosmosDB\",\n    \"description\": \"Disable public access to CosmosDB\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/DisablePublicAccessOnCosmosDB\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Disable public access to CosmosDB\"\n        }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/disable-publicaccess-cosmosdb?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "{{subscriptionId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyAssignments",
+                    "disable-publicaccess-cosmosdb"
                   ],
                   "query": [
                     {
