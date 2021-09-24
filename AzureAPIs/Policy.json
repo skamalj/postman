@@ -1150,7 +1150,7 @@
               "response": []
             },
             {
-              "name": "AP  - NSG Audit - Subscription Scope",
+              "name": "Assign - NSG Public Rule",
               "event": [
                 {
                   "listen": "test",
