@@ -638,58 +638,6 @@
               "response": []
             },
             {
-              "name": "Location Definition Copy",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "154066c3-58f2-40aa-a255-83f80f94a4a5",
-                    "exec": [
-                      "pm.test(\"Status code is 200 or 204\", function () {",
-                      "    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
-                      "});",
-                      ""
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "id": "0dd57dfc-e5ce-4320-9f44-ae9508bd910d",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/LocationPolicy?api-version=2021-06-01",
-                  "protocol": "https",
-                  "host": [
-                    "management",
-                    "azure",
-                    "com"
-                  ],
-                  "path": [
-                    "providers",
-                    "Microsoft.Management",
-                    "managementGroups",
-                    "{{MGId}}",
-                    "providers",
-                    "Microsoft.Authorization",
-                    "policyDefinitions",
-                    "LocationPolicy"
-                  ],
-                  "query": [
-                    {
-                      "key": "api-version",
-                      "value": "2021-06-01"
-                    }
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
               "name": "Define - Location Policy",
               "event": [
                 {
@@ -927,6 +875,58 @@
                     "Microsoft.Authorization",
                     "policyAssignments",
                     "disable-publicaccess-cosmosdb"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "2021-06-01"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Location Definition Copy",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "154066c3-58f2-40aa-a255-83f80f94a4a5",
+                    "exec": [
+                      "pm.test(\"Status code is 200 or 204\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "id": "0dd57dfc-e5ce-4320-9f44-ae9508bd910d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/LocationPolicy?api-version=2021-06-01",
+                  "protocol": "https",
+                  "host": [
+                    "management",
+                    "azure",
+                    "com"
+                  ],
+                  "path": [
+                    "providers",
+                    "Microsoft.Management",
+                    "managementGroups",
+                    "{{MGId}}",
+                    "providers",
+                    "Microsoft.Authorization",
+                    "policyDefinitions",
+                    "LocationPolicy"
                   ],
                   "query": [
                     {
