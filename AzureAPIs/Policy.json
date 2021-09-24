@@ -850,6 +850,20 @@
             },
             {
               "name": "Define - IPRule on CosmosDB",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "26537996-fc5f-4e48-990b-1d9d8543a05e",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "3a7f0275-0ea6-447d-98a9-d80f7e098d52",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
