@@ -1316,6 +1316,20 @@
             },
             {
               "name": "Define  - ACR Disable Public Access",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "0e29f058-88b2-4864-83c1-3af6f55b8301",
+                    "exec": [
+                      "pm.test(\"Status code is 201\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "58f18c4c-0288-4d66-a817-98fbcb56b3c8",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
@@ -1325,7 +1339,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Enable Retention policy on ACR\",\n    \"mode\": \"Indexed\",\n    \"description\": \"Enable Retention policy on ACR\",\n    \"metadata\": {\n      \"version\": \"1.0.0\",\n      \"category\": \"Containers\"\n    },\n    \"policyRule\": {\n      \"if\": {\n                \"field\": \"Microsoft.ContainerRegistry/registries/publicNetworkAccess\",\n                \"equals\": \"enabled\"\n      },\n      \"then\": {\n        \"effect\": \"modify\",\n        \"details\": {\n            \"roleDefinitionIds\": [\n                \"/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\n            ],\n            \"operations\" : [\n                {\n                    \"operation\": \"addOrReplace\",\n                    \"field\" : \"Microsoft.ContainerRegistry/registries/publicNetworkAccess\",\n                    \"value\": \"disabled\"\n                }\n            ]\n        }\n      }\n    }\n  }\n}",
+                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Disable public access on ACR\",\n    \"mode\": \"Indexed\",\n    \"description\": \"Disable public access in ACR\",\n    \"metadata\": {\n      \"version\": \"1.0.0\",\n      \"category\": \"Containers\"\n    },\n    \"policyRule\": {\n      \"if\": {\n                \"field\": \"Microsoft.ContainerRegistry/registries/publicNetworkAccess\",\n                \"equals\": \"enabled\"\n      },\n      \"then\": {\n        \"effect\": \"modify\",\n        \"details\": {\n            \"roleDefinitionIds\": [\n                \"/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c\"\n            ],\n            \"operations\" : [\n                {\n                    \"operation\": \"addOrReplace\",\n                    \"field\" : \"Microsoft.ContainerRegistry/registries/publicNetworkAccess\",\n                    \"value\": \"disabled\"\n                }\n            ]\n        }\n      }\n    }\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
