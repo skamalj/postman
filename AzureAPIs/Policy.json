@@ -1287,7 +1287,7 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/NSGPublicRule?api-version=2021-06-01",
+                  "raw": "https://management.azure.com/providers/Microsoft.Management/managementGroups/{{MGId}}/providers/Microsoft.Authorization/policyDefinitions/ACRDisablePublicAccessPolicy?api-version=2021-06-01",
                   "protocol": "https",
                   "host": [
                     "management",
@@ -1302,7 +1302,7 @@
                     "providers",
                     "Microsoft.Authorization",
                     "policyDefinitions",
-                    "NSGPublicRule"
+                    "ACRDisablePublicAccessPolicy"
                   ],
                   "query": [
                     {
