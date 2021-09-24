@@ -571,7 +571,7 @@
               "response": []
             },
             {
-              "name": "Storage Account Encrypted Definition Copy",
+              "name": "Location Definition",
               "event": [
                 {
                   "listen": "test",
