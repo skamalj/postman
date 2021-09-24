@@ -797,7 +797,7 @@
               "response": []
             },
             {
-              "name": "Location Definition Copy",
+              "name": "IPRule CosmosDB Definition",
               "event": [
                 {
                   "listen": "test",
