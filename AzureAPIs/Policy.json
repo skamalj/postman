@@ -537,6 +537,21 @@
           "item": [
             {
               "name": "Location Assignment",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "a8874427-f64b-46de-8e16-2bdc0094570d",
+                    "exec": [
+                      "pm.test(\"Status code is 200 or 204\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
               "id": "4e04e2ae-2c5a-4a42-80d8-4b47c10a0f80",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
