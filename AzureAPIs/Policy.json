@@ -762,7 +762,7 @@
           "name": "IPRule CosmosDB - append",
           "item": [
             {
-              "name": "Disable Public Access On CosmosDB",
+              "name": "IPRule CosmosDB - Assign",
               "id": "d2697104-9ced-40bd-abcf-e15235f36576",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
