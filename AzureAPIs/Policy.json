@@ -1382,6 +1382,8 @@
                   "script": {
                     "id": "4afa638c-e26a-45bf-babe-2c427ae99652",
                     "exec": [
+                      "principal = pm.response.json().identity.principalId",
+                      "pm.environment.set(\"principalId\", principal)",
                       "pm.test(\"Status code is 201\", function () {",
                       "    pm.response.to.have.status(201);",
                       "});"
