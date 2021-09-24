@@ -1052,50 +1052,6 @@
           "response": []
         },
         {
-          "name": "AP - VMs without managed Disks",
-          "id": "e3949635-c1eb-47e4-8ba0-e3dd71e82750",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"properties\": {\n    \"displayName\": \"Audit VMs without managed disks Assignment\",\n    \"description\": \"Shows all virtual machines not using managed disks\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Authorization/policyDefinitions/06a78e20-9358-41c9-923c-fb736d382a4d\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Virtual machines should use a managed disk\"\n        }\n    ]\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.Authorization/policyAssignments/audit-vm-manageddisks?api-version=2021-06-01",
-              "protocol": "https",
-              "host": [
-                "management",
-                "azure",
-                "com"
-              ],
-              "path": [
-                "subscriptions",
-                "{{subscriptionId}}",
-                "providers",
-                "Microsoft.Authorization",
-                "policyAssignments",
-                "audit-vm-manageddisks"
-              ],
-              "query": [
-                {
-                  "key": "api-version",
-                  "value": "2021-06-01"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
           "name": "AP  - ACR retention policy- Subscription Scope",
           "id": "de58386b-1db6-4c1b-b0d0-cfb4c6802335",
           "protocolProfileBehavior": {
