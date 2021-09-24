@@ -1174,7 +1174,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Audit NSG for public rule - Ingress\",\n    \"description\": \"Audit NSG for public rule - Ingress\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/NSGPublicRule\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"Ingress rule cannot have source as 0.0.0.0/0 or *\"\n        }\n    ]\n  }\n}",
+                  "raw": "{\n    \"properties\": {\n        \"displayName\": \"Enforce no public ingress rule in NSGs\",\n        \"description\": \"AEnforce no public ingress rule in NSGs\",\n        \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/NSGPublicRule\",\n        \"nonComplianceMessages\": [\n            {\n                \"message\": \"Ingress rule cannot have source as 0.0.0.0/0 or *\"\n            }\n        ]\n    }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
