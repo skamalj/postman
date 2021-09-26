@@ -1444,7 +1444,7 @@
                     "exec": [
                       "uuid = require('uuid')",
                       "pm.environment.set(\"roleGuid\",uuid.v4());",
-                      "setTimeout(function(){}, 5000)"
+                      "setTimeout(function(){}, 10000)"
                     ],
                     "type": "text/javascript"
                   }
