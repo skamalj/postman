@@ -722,7 +722,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Restrict location of resources\",\n    \"description\": \"All resources must be in  location - centralindia or eastus\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/LocationPolicy\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"All resources must be in  location - centralindia or eastus\"\n        }\n    ],\n    \"parameters\" : {\n        \"allowedLocations\": {\n            \"value\": [\"centralindia\",\"westus\"]\n        }\n    }\n  }\n}",
+                  "raw": "{\n  \"properties\": {\n    \"displayName\": \"Restrict location of resources\",\n    \"description\": \"All resources must be in  location - centralindia or eastus\",\n    \"policyDefinitionId\": \"/providers/Microsoft.Management/managementGroups/MgGrp301to3/providers/Microsoft.Authorization/policyDefinitions/LocationPolicy\",\n    \"nonComplianceMessages\": [\n        {\n            \"message\": \"All resources must be in  location - centralindia or eastus\"\n        }\n    ],\n    \"parameters\" : {\n        \"allowedLocations\": {\n            \"value\": [\"centralindia\",\"eastus\"]\n        }\n    }\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
